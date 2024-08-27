@@ -1,1 +1,14 @@
-{}
+{
+  "name": "kacelab",
+  "description": "🎨 clone coding | kacelab",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+     "build": "echo 'Build script not yet implemented'", 
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "SoYoung Lee",
+  "license": "ISC"
+}
