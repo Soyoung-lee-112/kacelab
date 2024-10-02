@@ -17,6 +17,7 @@
     --color-box-bg: #eee;
     --radius: 1.5rem;
     --darkmode: all 0.4s ease;
+    --marquee-gap: 7.5rem;
 }
 
 html, body {
@@ -26,6 +27,15 @@ html, body {
     /*color: var( --font-color);*/
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
+    /* overflow: hidden; */
+    height: 100%;
+    /* scrollbar-width: none; */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+
 }
 .w-50{width: 50% !important;}
 
@@ -41,4 +51,26 @@ img{max-width: 100%;}
     position: relative;
     width: 100%;
     padding: 0 4rem;
+}
+.more__btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.125rem;
+    aspect-ratio: 1 / 1;
+    background: var(--color-black);
+    font-size: 1.5rem;
+    color: var(--color-white);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+}
+.more__btn.white{
+    background: var(--color-white);
+    color: var(--color-black);
+}
+.more__btn i{
+    transition: all 0.4s ease;
+}
+.more__btn:hover>i {
+    transform: rotate(180deg);
 }
