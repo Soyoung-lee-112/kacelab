@@ -22,7 +22,27 @@ document.querySelector('.h__logo').addEventListener('mouseout', () => {
   });
 });
 
-
+  const topRightBottom = document.querySelector('.ms2 .top__right__item.bottom');
+  topRightBottom.addEventListener('mouseover', () => {
+    topRightBottom.classList.add('hover');
+  })
+  topRightBottom.addEventListener('mouseleave', () => {
+    topRightBottom.classList.remove('hover', 'hover1', 'hover2', 'hover3', 'hover4');
+  })
+  const items = document.querySelectorAll('.top__right__item .item');
+  items.forEach((item, index) => {
+    item.addEventListener('mouseover', () => {
+      const hoverClass = topRightBottom.classList.contains('hover');
+      if (hoverClass) { 
+        topRightBottom.classList.add(`hover${index}`);
+        item.classList.add('on');
+      }
+    })
+    item.addEventListener('mouseleave', () => {
+      topRightBottom.classList.remove(`hover${index}`);
+      item.classList.remove('on');
+    })
+  })
 })();
 
 
