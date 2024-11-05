@@ -6,7 +6,9 @@
 
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/mobile.css" />
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script
       src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
       integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
@@ -18,13 +20,16 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
-    <script src="js/lib/locomotive-scroll.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+    <script src="./js/lib/locomotive-scroll.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.5.0/build/global/luxon.min.js"></script>
   </head>
   <body>
     <div class="wrap">
+      <!-- HEADER -->
       <header id="header" class="header">
         <div class="inner h__inner">
           <div class="h__logo">
@@ -42,8 +47,44 @@
           </div>
         </div>
       </header>
+      <!-- NAV BOX -->
+      <div class="nav__box"></div>
+      <!-- MAIN SECTION -->
       <div class="container main__wrap">
-        <section class="main__section ms1"></section>
+        <section id="ms1__pin" class="main__section ms1">
+          <div class="inner pin__wrap">
+            <div class="ms1__textWrap">
+              <p class="fixed_txtbox">
+                <span class="word">W</span>
+                <span class="word">e</span>
+                <span class="word blank"></span>
+                <span class="word">w</span>
+                <span class="word">i</span>
+                <span class="word">t</span>
+                <span class="word">h</span>
+              </p>
+              <p class="ani_txtbox">
+                <span class="blink"></span>
+                <span
+                  class="typing typing_effect"
+                  data-text="Passion,Professional,Ideas,Business,User,Dreams"
+                ></span>
+              </p>
+            </div>
+            <div class="ms1__videoWrap" data-aos="fade-in">
+              <div class="ms1__vidbox">
+                <video
+                  class="ms1__video"
+                  src="./video/main_video_2024.mp4"
+                  loop="loop"
+                  muted="muted"
+                  autoplay="autoplay"
+                  playinline
+                ></video>
+              </div>
+            </div>
+          </div>
+        </section>
         <section class="main__section ms2">
           <div class="inner ms2__content_box">
             <div class="ms2__content ms2__left">
@@ -233,7 +274,7 @@
                         <div class="txt__box">
                           <div class="left">
                             <p class="tit">Contact</p>
-                            <p class="desc">Request Projects $ Operation</p>
+                            <p class="desc">Request Projects & Operation</p>
                           </div>
                           <div class="right">
                             <div class="more__btn white">

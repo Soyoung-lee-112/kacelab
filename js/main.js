@@ -1,46 +1,88 @@
-// gsap.registerPlugin(ScrollTrigger);
-// scroller.on("scroll", ScrollTrigger.update);
-//
+document.addEventListener("DOMContentLoaded", function () {
+  const pageContainer = document.querySelector(".container");
 
-window.addEventListener("load", function () {
+  const scroller = new LocomotiveScroll({
+    el: pageContainer,
+    smooth: true,
+  });
 
+  gsap.registerPlugin(ScrollTrigger);
 
+  // ScrollTrigger와 LocomotiveScroll 연동
+  ScrollTrigger.scrollerProxy(pageContainer, {
+    scrollTop(value) {
+      return arguments.length
+        ? scroller.scrollTo(value, 0, 0)
+        : scroller.scroll.instance.scroll.y;
+    },
+    getBoundingClientRect() {
+      return {
+        left: 0,
+        top: 0,
+        width: window.innerWidth,
+        height: window.innerHeight,
+      };
+    },
+    pinType: pageContainer.style.transform ? "transform" : "fixed",
+  });
+
+  scroller.on("scroll", () => {
+    console.log("Scroll event triggered");
+    ScrollTrigger.update();
+  });
+
+  window.addEventListener("load", function () {
+    $(document).ready(function () {
+      // 스크롤 시 애니메이션 설정
+      gsap.to(".ms1 .ms1__videoWrap", {
+        scrollTrigger: {
+          trigger: "#ms1__pin",
+          scroller: pageContainer,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.3,
+          pin: true, // 핀 설정
+        },
+        width: "calc(100% - 8rem)", // 목표 너비
+        ease: "power2.inOut",
+      });
+    });
+  });
 });
 
 (function () {
-    setInterval(updateDateTime, 1000);
+  setInterval(updateDateTime, 1000);
 
-    const videoWrapper = document.querySelector('#ms2__videobox');
-    const video = document.querySelector("#ms2__video");
+  const videoWrapper = document.querySelector("#ms2__videobox");
+  const video = document.querySelector("#ms2__video");
 
-    videoWrapper.addEventListener('mouseenter', () => {
-        video.play();
-    });
-  
-    videoWrapper.addEventListener('mouseleave', () => {
-        video.pause();
-        // video.currentTime = 0;
-    });
-    
+  videoWrapper.addEventListener("mouseenter", () => {
+    video.play();
+  });
+
+  videoWrapper.addEventListener("mouseleave", () => {
+    video.pause();
+    // video.currentTime = 0;
+  });
 })();
 
 function updateDateTime() {
-    const dt = luxon.DateTime.now();
+  const dt = luxon.DateTime.now();
 
-    const week = dt.toFormat('EEE');
-    const day = dt.toFormat('dd');
-    const hours = dt.toFormat('HH');
-    const minutes = dt.toFormat('mm');
+  const week = dt.toFormat("EEE");
+  const day = dt.toFormat("dd");
+  const hours = dt.toFormat("HH");
+  const minutes = dt.toFormat("mm");
 
-    const weekEl = document.querySelector('.day_of_week');
-    const dayEl = document.querySelector('.day_of_month');
-    const hoursEl = document.querySelector('.time__h');
-    const minutesEl = document.querySelector('.time__m');
+  const weekEl = document.querySelector(".day_of_week");
+  const dayEl = document.querySelector(".day_of_month");
+  const hoursEl = document.querySelector(".time__h");
+  const minutesEl = document.querySelector(".time__m");
 
-    weekEl.textContent = week;
-    dayEl.textContent = day;
-    hoursEl.textContent = hours;
-    minutesEl.textContent = minutes;
+  weekEl.textContent = week;
+  dayEl.textContent = day;
+  hoursEl.textContent = hours;
+  minutesEl.textContent = minutes;
 }
 
 class Marquee {
@@ -77,7 +119,9 @@ class Marquee {
 
   // 마우스 및 스크롤 이벤트 초기화
   initEvents() {
-    this.el.addEventListener("mouseenter", () => this.setAnimationSpeed(this.SLOWDOWN_RATE));
+    this.el.addEventListener("mouseenter", () =>
+      this.setAnimationSpeed(this.SLOWDOWN_RATE)
+    );
     this.el.addEventListener("mouseleave", () => this.setAnimationSpeed(1));
 
     if (this.el.classList.contains("ms3_marquee")) {
@@ -92,7 +136,10 @@ class Marquee {
 
   // 스크롤 속도에 따라 애니메이션 속도 조정
   adjustAnimationSpeed(scrollSpeed) {
-    const playbackRate = Math.min(1 + scrollSpeed / 1000 * (this.maxPlaybackRate - 1), this.maxPlaybackRate);
+    const playbackRate = Math.min(
+      1 + (scrollSpeed / 1000) * (this.maxPlaybackRate - 1),
+      this.maxPlaybackRate
+    );
     this.setAnimationSpeed(playbackRate);
   }
 
@@ -101,9 +148,10 @@ class Marquee {
     const clone = this.el.querySelector(".marquee__group").cloneNode(true);
     clone.classList.add("clone");
     this.el.append(clone);
-    this.marqueeGroups = Array.from(this.el.querySelectorAll(".marquee__group"));
+    this.marqueeGroups = Array.from(
+      this.el.querySelectorAll(".marquee__group")
+    );
   }
 }
-
 
 document.querySelectorAll(".marquee").forEach((el) => new Marquee({ el }));
