@@ -26,30 +26,27 @@ document.addEventListener("DOMContentLoaded", function () {
     pinType: pageContainer.style.transform ? "transform" : "fixed",
   });
 
-  scroller.on("scroll", () => {
-    console.log("Scroll event triggered");
-    ScrollTrigger.update();
-  });
+  scroller.on("scroll", ScrollTrigger.update);
 
-  window.addEventListener("load", function () {
-    $(document).ready(function () {
-      // 스크롤 시 애니메이션 설정
-      gsap.to(".ms1 .ms1__videoWrap", {
-        scrollTrigger: {
-          trigger: "#ms1__pin",
-          scroller: pageContainer,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.3,
-          pin: true, // 핀 설정
-        },
-        width: "calc(100% - 8rem)", // 목표 너비
-        ease: "power2.inOut",
-      });
-    });
+  // 비디오 영역 애니메이션 설정
+  gsap.to(".ms1 .ms1__videoWrap", {
+    // width: "calc(100% - 8rem)", // 목표 너비
+    width: "calc((100% - 8rem) / 2)",
+    scrollTrigger: {
+      trigger: ".pin__wrap",
+      scroller: pageContainer,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.3,
+      pin: true,
+    },
+    ease: "power2.inOut",
+    onStart: () => {
+      // 애니메이션이 시작할 때 너비를 초기화
+      gsap.set(".ms1 .ms1__videoWrap", { width: "0" });
+    },
   });
 });
-
 (function () {
   setInterval(updateDateTime, 1000);
 
