@@ -122,23 +122,25 @@ img{max-width: 100%;}
     top: 18px;
     left: 0;
 }
-.header .menu__icon .menu__linebox:hover .menu__line.line_1 {
+.header .menu__icon .menu__linebox:hover .menu__line.line_1{
     top: 10px;
 }
 
-.header .menu__icon .menu__linebox:hover .menu__line.line_2 {
+.header .menu__icon .menu__linebox:hover .menu__line.line_2{
     width: 100%;
     transform: rotate(90deg);
 }
 
-.header .menu__icon .menu__linebox:hover .menu__line.line_3 {
+.header .menu__icon .menu__linebox:hover .menu__line.line_3{
     top: 10px;
 }
+.header .menu__icon .menu__linebox.open .menu__line.line_1 {opacity: 0;}
+.header .menu__icon .menu__linebox.open .menu__line.line_2 { width: 100%; top: 10px; transform: rotate(45deg);}
+.header .menu__icon .menu__linebox.open .menu__line.line_3 {top: 10px; transform: rotate(-45deg);}
 
 .header .menu__icon .menu__linebox.open:hover {
     transform: rotate(180deg);
 }
-
 .more__btn{
     display: inline-flex;
     align-items: center;

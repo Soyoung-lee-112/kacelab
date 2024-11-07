@@ -1,11 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const pageContainer = document.querySelector(".container");
-
-  const scroller = new LocomotiveScroll({
-    el: pageContainer,
-    smooth: true,
-  });
-
   gsap.registerPlugin(ScrollTrigger);
 
   // ScrollTrigger와 LocomotiveScroll 연동
@@ -27,26 +20,64 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   scroller.on("scroll", ScrollTrigger.update);
+});
+window.onload = () => {
+  gsap.set(".ms1 .ms1__videoWrap", { width: 0 });
 
-  // 비디오 영역 애니메이션 설정
   gsap.to(".ms1 .ms1__videoWrap", {
-    // width: "calc(100% - 8rem)", // 목표 너비
-    width: "calc((100% - 8rem) / 2)",
     scrollTrigger: {
-      trigger: ".pin__wrap",
+      trigger: "#ms1__pin",
       scroller: pageContainer,
       start: "top top",
       end: "bottom bottom",
       scrub: 0.3,
       pin: true,
     },
+    // width: "calc(100% - 8rem)", // 목표 너비
+    width: "calc((100% - 8rem) / 2)",
     ease: "power2.inOut",
-    onStart: () => {
-      // 애니메이션이 시작할 때 너비를 초기화
-      gsap.set(".ms1 .ms1__videoWrap", { width: "0" });
-    },
   });
-});
+  function checkScreenWidth() {
+    if (window.matchMedia("(max-width: 1024px)").matches) {
+      // 1024px 미만일 때 실행할 코드
+      //
+      gsap.to(".ms1 .ms1__videoWrap", {
+        scrollTrigger: {
+          trigger: "#ms1__pin",
+          scroller: pageContainer,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.3,
+          pin: true,
+        },
+        width: "calc(100% - 8rem)", // 목표 너비
+        // width: "calc((100% - 8rem) / 2)",
+        ease: "power2.inOut",
+      });
+      console.log("The screen width is less than 1024px");
+      // 추가로 실행할 코드 작성
+    } else {
+      gsap.to(".ms1 .ms1__videoWrap", {
+        scrollTrigger: {
+          trigger: "#ms1__pin",
+          scroller: pageContainer,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.3,
+          pin: true,
+        },
+        width: "calc((100% - 8rem) / 2)",
+        ease: "power2.inOut",
+      });
+    }
+  }
+
+  // 페이지 로드 시 확인
+  checkScreenWidth();
+
+  // 윈도우 크기 조정 시에도 확인 (반응형)
+  window.addEventListener("resize", checkScreenWidth);
+};
 (function () {
   setInterval(updateDateTime, 1000);
 
