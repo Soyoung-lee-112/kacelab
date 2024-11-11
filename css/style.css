@@ -857,7 +857,7 @@ c .nav__box::-webkit-scrollbar {
 .ms3 .ms3_pin .pin__wrap .ms3__txt_wrap {
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -40px;
 }
 .ms3 .ms3_pin .pin__wrap .ms3__txt_wrap .ms3__txt_box {
   display: flex;

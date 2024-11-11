@@ -77,6 +77,29 @@ window.onload = () => {
 
   // 윈도우 크기 조정 시에도 확인 (반응형)
   window.addEventListener("resize", checkScreenWidth);
+
+  let ms3_pinWrap = document.querySelector(".ms3_pin .pin__wrap");
+  let ms3_pinWrapWidth = ms3_pinWrap.offsetWidth;
+  let ms3_ScrollLength = ms3_pinWrapWidth - window.innerWidth;
+
+  gsap.to(".ms3_pin .pin__wrap", {
+    scrollTrigger: {
+      scroller: pageContainer, // locomotive-scroll을 위한 스크롤러 설정
+      scrub: true, // 스크롤과 애니메이션을 동기화하여 자연스럽게 애니메이션함
+      trigger: "#ms3_pin", // 애니메이션을 트리거할 엘리먼트
+      pin: true, // 트리거가 시작될 때 해당 섹션을 고정
+      start: "top top", // 트리거 시작 지점을 설정 (상단에서 시작)
+      end: () => `+=${ms3_ScrollLength + window.innerWidth}`, // 트리거 끝 지점 설정
+      onUpdate: () => {
+        // pin_wrap의 x 변화에 따라 ms3_txtbox의 위치를 조정합니다.
+        gsap.set(".ms3_pin .ms3__txt_box", {
+          x: -gsap.getProperty(".ms3_pin .pin__wrap", "x")
+        });
+      }
+    },
+    x: -ms3_ScrollLength, // pin_wrap을 왼쪽으로 이동
+    ease: "none" // Ease 효과를 없앰 (직선 이동)
+  });
 };
 (function () {
   setInterval(updateDateTime, 1000);
